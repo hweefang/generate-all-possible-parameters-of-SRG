@@ -1,0 +1,47 @@
+#SageMath
+#To generate all possible parameters for strongly regular graphs G_i   
+#Note that co-cliques, cliques, disconnected strongly regular graphs are not considered
+#call the function srgs(s,0) to generate all possible parameters of G_i for smallest eigenvalue=s
+
+def listSrgs(s,mu,b):
+  ll=[]
+  for r in range(0,Integer((s)*(s+1)*(mu+1)/2)):
+    k=mu-r*s
+    if k <= 0:
+      continue
+    lam=r+s+mu
+    if lam < 0:
+      continue
+    if k <= lam:
+      continue
+    if k*(k-lam-1) % mu != 0:
+      continue 
+    v=k*(k-lam-1)/mu+k+1
+    if ((v-1)*s+k) % (r-s) != 0:
+      continue
+    mr=-((v-1)*s+k)/(r-s)
+    if mr < 1:
+      continue
+    if ((v-1)*r+k) % (r-s) != 0:
+      continue
+    ms=((v-1)*r+k)/(r-s)
+    if ms < 1:
+      continue
+    if r*s^2-2*r^2*s-r^2-k*r+k*s^2+2*k*s < 0:
+      continue
+    if s*r^2-2*s^2*r-s^2-k*s+k*r^2+2*k*r < 0:
+      continue
+    if v > (mr+2)*(mr+1)/2-1:
+      continue
+    if v > (ms+2)*(ms+1)/2-1:
+      continue
+    if lam/mu >= b:
+        ll+=[[v,k,lam,mu,r]]
+  return ll
+    
+def srgs(s,b):
+  ll=[]
+  for mu in range(1,(-2*s-3)*(-s)^3+1):
+    ll+=listSrgs(s,mu,b)
+    
+  return ll
