@@ -1,7 +1,8 @@
 #SageMath
 #To generate all possible parameters for strongly regular graphs G_i   
 #Note that co-cliques, cliques, disconnected strongly regular graphs are not considered
-#call the function srgs(s,0) to generate all possible parameters of G_i for smallest eigenvalue=s
+#call the function srgs(s,0) to generate all possible parameters of G_i for negative $\mu$ values where $s=\mu$, i.e. srgs(-3,0) for all possible G_i parameters for $\mu=-3$
+
 
 def listSrgs(s,mu,b):
   ll=[]
